@@ -5,6 +5,9 @@
 #include <fstream>
 #include <climits>
 #include <cmath>
+#include <thread>
+#include <mutex>
+#include <atomic>
 
 class Generator
 {
@@ -15,7 +18,7 @@ public:
     static constexpr liczba_t PIERWIASTEK_MAX = static_cast<liczba_t>(std::sqrt(static_cast<long double>(MAX)));
 
     Generator(const size_t a_rozmiar_listy);
-    void PobierzLiczby();
+    ~Generator();
     liczba_t DajLiczbe();
     liczba_t DajLiczbe(const liczba_t a_start, const liczba_t a_koniec);
     bool CzyJestLiczba();

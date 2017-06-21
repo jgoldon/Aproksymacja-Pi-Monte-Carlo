@@ -1,7 +1,8 @@
 #ifndef _ekran_h_
 #define _ekran_h_
 #include <ncurses.h>
-#include"aproksymator.h"
+#include "aproksymator.h"
+#include <thread>
 
 class Ekran
 {
@@ -14,7 +15,7 @@ private:
     Generator & m_generator;
     Sumator & m_sumator;
     Aproksymator & m_aproksymator;
-    void Wyswietl();
+	void Wyswietl();
     volatile bool m_aktywny = true;
     std::thread m_watek;
 };

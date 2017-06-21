@@ -1,6 +1,7 @@
 #include"generator.h"
 #include <chrono>
 
+
 Generator::Generator(const size_t a_rozmiar_listy)
 : m_rozmiar_listy(a_rozmiar_listy)
 , m_watek()
@@ -71,7 +72,7 @@ void Generator::Stop()
     m_aktywny = false;
 }
 
-bool Generator::CzyJestLiczba() 
+bool Generator::CzyJestLiczba()
 {
     std::lock_guard<std::mutex> blokada(m_bariera_listy);
     return !m_lista_liczb.empty();
@@ -85,7 +86,7 @@ void Generator::PobierzBufor()
     is.close();
 }
 
-Generator::liczba_t Generator::PobierzLiczbeZBufora()
+Generator::liczba_t Generator::PobierzLiczbeZBufora() const
 {
     liczba_t liczba = 0;
     for(size_t i = 0; i < m_rozmiar_liczby; ++i)

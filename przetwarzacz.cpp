@@ -27,13 +27,13 @@ void Przetwarzacz::Sumuj()
     ++m_suma_w_kwadracie;
 }
 
-Generator::liczba_t Przetwarzacz::DajSumeWKwadracie() const
+Generator::liczba_t Przetwarzacz::DajSumeWKwadracie()
 {
     std::lock_guard<std::mutex> blokada(m_bariera);
     return m_suma_w_kwadracie;
 }
 
-Generator::liczba_t Przetwarzacz::DajSumeWKole() const
+Generator::liczba_t Przetwarzacz::DajSumeWKole()
 {
     std::lock_guard<std::mutex> blokada(m_bariera);
     return m_suma_w_kole;

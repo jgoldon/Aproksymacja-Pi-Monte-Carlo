@@ -1,8 +1,8 @@
-#include"ekran.h"
+#include "ekran.h"
 #include <thread>
 #include <chrono>
 
-Ekran::Ekran(Generator & a_generator, Sumator & a_sumator, Aproksymator a_aproksymator)
+Ekran::Ekran(Generator & a_generator, Sumator & a_sumator, Aproksymator & a_aproksymator)
 : m_generator(a_generator)
 , m_sumator(a_sumator)
 , m_aproksymator(a_aproksymator)
