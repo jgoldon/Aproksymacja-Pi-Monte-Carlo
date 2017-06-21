@@ -6,7 +6,6 @@ Ekran::Ekran(Generator & a_generator, Sumator & a_sumator, Aproksymator & a_apro
 : m_generator(a_generator)
 , m_sumator(a_sumator)
 , m_aproksymator(a_aproksymator)
-, m_watek()
 {
 }
 
@@ -15,7 +14,7 @@ Ekran::~Ekran()
     if(m_watek.joinable())
     {
         m_watek.join();
-    }
+    }   
 }
 
 void Ekran::Wyswietl()

@@ -1,24 +1,15 @@
-#include"generator.h"
+#include "generator.h"
 #include <chrono>
 
 
 Generator::Generator(const size_t a_rozmiar_listy)
 : m_rozmiar_listy(a_rozmiar_listy)
-, m_watek()
 {
-}
-
-Generator::~Generator()
-{
-    if(m_watek.joinable())
-    {
-        m_watek.join();
-    }   
 }
 
 void Generator::LadujKolejke()
 {
-    std::lock_guard<std::mutex> blokada(m_bariera_listy);
+    std::lock_guard<std::mutex> blokada(m_bariera);
     while(m_lista_liczb.size() < m_rozmiar_listy)
     {
         PobierzLiczbe();
@@ -27,7 +18,7 @@ void Generator::LadujKolejke()
 
 Generator::liczba_t Generator::DajLiczbe()
 {
-    std::lock_guard<std::mutex> blokada(m_bariera_listy);
+    std::lock_guard<std::mutex> blokada(m_bariera);
     if (!m_lista_liczb.empty())
     {
         PobierzLiczbe();
@@ -46,7 +37,7 @@ Generator::liczba_t Generator::DajLiczbe(const liczba_t a_start, const liczba_t 
 
 size_t Generator::DajDlugoscKolejki()
 {
-    std::lock_guard<std::mutex> blokada(m_bariera_listy);
+    std::lock_guard<std::mutex> blokada(m_bariera);
     return m_lista_liczb.size();
 }
 
@@ -67,14 +58,9 @@ void Generator::Start()
     }
 }
 
-void Generator::Stop()
-{
-    m_aktywny = false;
-}
-
 bool Generator::CzyJestLiczba()
 {
-    std::lock_guard<std::mutex> blokada(m_bariera_listy);
+    std::lock_guard<std::mutex> blokada(m_bariera);
     return !m_lista_liczb.empty();
 }
 

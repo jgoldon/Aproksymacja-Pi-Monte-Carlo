@@ -1,16 +1,8 @@
-#include"sumator.h"
+#include "sumator.h"
 
 Sumator::Sumator(lista_przetwarzaczy_t & a_lista_przetwarzaczy)
 : m_lista_przetwarzaczy(a_lista_przetwarzaczy)
 {
-}
-
-Sumator::~Sumator()
-{
-    if(m_watek.joinable())
-    {
-        m_watek.join();
-    }   
 }
 
 void Sumator::Sumuj()
@@ -48,11 +40,6 @@ void Sumator::Start()
     {
         m_watek = std::thread(&Sumator::GlownaPetla, this);
     }
-}
-
-void Sumator::Stop()
-{
-    m_aktywny = false;
 }
 
 void Sumator::GlownaPetla()

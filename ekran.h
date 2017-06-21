@@ -11,11 +11,11 @@ public:
     ~Ekran();
     void Start();
 private:
+    void Wyswietl();
     void GlownaPetla(); 
     Generator & m_generator;
     Sumator & m_sumator;
     Aproksymator & m_aproksymator;
-	void Wyswietl();
     volatile bool m_aktywny = true;
     std::thread m_watek;
 };

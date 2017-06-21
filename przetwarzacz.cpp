@@ -2,16 +2,7 @@
 
 Przetwarzacz::Przetwarzacz(Generator & a_generator)
 : m_generator(a_generator)
-, m_watek()
 {
-}
-
-Przetwarzacz::~Przetwarzacz()
-{
-    if(m_watek.joinable())
-    {
-        m_watek.join();
-    }  
 }
 
 void Przetwarzacz::Sumuj()
@@ -45,11 +36,6 @@ void Przetwarzacz::Start()
     {
         m_watek = std::thread(&Przetwarzacz::GlownaPetla, this);
     }
-}
-
-void Przetwarzacz::Stop()
-{
-    m_aktywny = false;
 }
 
 void Przetwarzacz::GlownaPetla()
