@@ -8,11 +8,15 @@ class Ekran
 public:
     Ekran(Generator & a_generator, Sumator & a_sumator, Aproksymator a_aproksymator);
     ~Ekran();
-    void Wyswietl();
+    void Start();
 private:
+    void GlownaPetla(); 
     Generator & m_generator;
     Sumator & m_sumator;
     Aproksymator & m_aproksymator;
+    void Wyswietl();
+    volatile bool m_aktywny = true;
+    std::thread m_watek;
 };
 
 #endif

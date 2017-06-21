@@ -1,13 +1,24 @@
 #include"generator.h"
+#include <chrono>
 
 Generator::Generator(const size_t a_rozmiar_listy)
 : m_rozmiar_listy(a_rozmiar_listy)
+, m_watek()
 {
     PobierzLiczby();
 }
 
+Generator::~Generator()
+{
+    if(m_watek.joinable())
+    {
+        m_watek.join();
+    }   
+}
+
 void Generator::PobierzLiczby()
 {
+    std::lock_guard<std::mutex> blokada(m_bariera_listy);
     while(m_lista_liczb.size() < m_rozmiar_listy)
     {
         PobierzLiczbe();
@@ -16,7 +27,8 @@ void Generator::PobierzLiczby()
 
 Generator::liczba_t Generator::DajLiczbe()
 {
-    if (!CzyJestLiczba())
+    std::lock_guard<std::mutex> blokada(m_bariera_listy);
+    if (!m_lista_liczb.empty())
     {
         PobierzLiczbe();
     }
@@ -32,13 +44,37 @@ Generator::liczba_t Generator::DajLiczbe(const liczba_t a_start, const liczba_t 
     return skala * (a_koniec - a_start) + a_start;
 }
 
-size_t Generator::DajDlugoscKolejki() const
+size_t Generator::DajDlugoscKolejki()
 {
+    std::lock_guard<std::mutex> blokada(m_bariera_listy);
     return m_lista_liczb.size();
 }
 
-bool Generator::CzyJestLiczba() const
+void Generator::GlownaPetla()
 {
+    while(m_aktywny)
+    {
+        LadujKolejke();
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+}
+
+void Generator::Start()
+{
+    if(!m_watek.joinable())
+    {
+        m_watek = std::thread(&Generator::GlownaPetla, this);
+    }
+}
+
+void Generator::Stop()
+{
+    m_aktywny = false;
+}
+
+bool Generator::CzyJestLiczba() 
+{
+    std::lock_guard<std::mutex> blokada(m_bariera_listy);
     return !m_lista_liczb.empty();
 }
 
@@ -50,7 +86,7 @@ void Generator::PobierzBufor()
     is.close();
 }
 
-Generator::liczba_t Generator::PobierzLiczbeZBufora() const
+Generator::liczba_t Generator::PobierzLiczbeZBufora()
 {
     liczba_t liczba = 0;
     for(size_t i = 0; i < m_rozmiar_liczby; ++i)

@@ -18,16 +18,23 @@ public:
     void PobierzLiczby();
     liczba_t DajLiczbe();
     liczba_t DajLiczbe(const liczba_t a_start, const liczba_t a_koniec);
-    bool CzyJestLiczba() const;
-    size_t DajDlugoscKolejki() const;
+    bool CzyJestLiczba();
+    size_t DajDlugoscKolejki();
+    void GlownaPetla();
+    void Start();
+    void Stop();
+    void LadujKolejke();
  private:
     void PobierzBufor();
-    liczba_t PobierzLiczbeZBufora() const;
+    liczba_t PobierzLiczbeZBufora();
     void PobierzLiczbe();
     static const size_t m_rozmiar_liczby = sizeof(liczba_t);
     char m_bufor[m_rozmiar_liczby];
     size_t m_rozmiar_listy = 0;
     std::queue<liczba_t> m_lista_liczb;
+    volatile bool m_aktywny = true;
+    std::thread m_watek;
+    std::mutex m_bariera_listy;
 };
 
 #endif
