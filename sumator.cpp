@@ -20,8 +20,8 @@ void Sumator::Sumuj()
     m_lacznie_w_kole = 0;
     for(auto & przetwarzacz : m_lista_przetwarzaczy)
     {
-        m_lacznie_w_kwadracie += przetwarzacz.DajSumeWKwadracie();
-        m_lacznie_w_kole += przetwarzacz.DajSumeWKole();
+        m_lacznie_w_kwadracie += przetwarzacz->DajSumeWKwadracie();
+        m_lacznie_w_kole += przetwarzacz->DajSumeWKole();
     }
 }
 

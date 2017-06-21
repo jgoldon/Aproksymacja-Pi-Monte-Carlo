@@ -1,10 +1,10 @@
 #ifndef _generator_h_
 #define _generator_h_
 
-#include<queue>
-#include<fstream>
-#include<climits>
-#include<cmath>
+#include <queue>
+#include <fstream>
+#include <climits>
+#include <cmath>
 
 class Generator
 {
@@ -26,7 +26,7 @@ public:
     void LadujKolejke();
  private:
     void PobierzBufor();
-    liczba_t PobierzLiczbeZBufora();
+    liczba_t PobierzLiczbeZBufora() const;
     void PobierzLiczbe();
     static const size_t m_rozmiar_liczby = sizeof(liczba_t);
     char m_bufor[m_rozmiar_liczby];

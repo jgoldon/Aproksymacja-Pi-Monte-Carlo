@@ -1,4 +1,4 @@
-#include"przetwarzacz.h"
+#include "przetwarzacz.h"
 
 Przetwarzacz::Przetwarzacz(Generator & a_generator)
 : m_generator(a_generator)

@@ -1,8 +1,8 @@
 #ifndef _sumator_h_
 #define _sumator_h_
 
-#include<vector>
-#include"przetwarzacz.h"
+#include <vector>
+#include "przetwarzacz.h"
 
 class Sumator
 {

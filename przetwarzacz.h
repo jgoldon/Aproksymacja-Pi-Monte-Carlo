@@ -1,9 +1,9 @@
 #ifndef _przetwarzacz_h_
 #define _przetwarzacz_h_
 
-#include"generator.h"
-#include<thread>
-#include<mutex>
+#include "generator.h"
+#include <thread>
+#include <mutex>
 
 class Przetwarzacz
 {
@@ -11,8 +11,8 @@ public:
     Przetwarzacz(Generator & a_generator);
     ~Przetwarzacz();
     void Sumuj(const int a_ilosc);
-    Generator::liczba_t DajSumeWKwadracie() const;
-    Generator::liczba_t DajSumeWKole() const;
+    Generator::liczba_t DajSumeWKwadracie();
+    Generator::liczba_t DajSumeWKole();
     void Start();
     void Stop();
     void GlownaPetla();

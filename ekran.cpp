@@ -8,9 +8,6 @@ Ekran::Ekran(Generator & a_generator, Sumator & a_sumator, Aproksymator a_aproks
 , m_aproksymator(a_aproksymator)
 , m_watek()
 {
-    initscr();
-    noecho();
-    nodelay(stdscr, TRUE);
 }
 
 Ekran::~Ekran()
@@ -19,7 +16,6 @@ Ekran::~Ekran()
     {
         m_watek.join();
     }
-    endwin();
 }
 
 void Ekran::Wyswietl()
@@ -31,8 +27,7 @@ void Ekran::Wyswietl()
     printw("lacznie w kole: %llu\n", m_sumator.DajLacznieWKole());
 
     auto wiersze_max = 10;
-    auto i = 0;
-    Sumator::lista_przetwarzaczy_t lista_przetwarzaczy = m_sumator.DajListePrzetwarzaczy();
+    auto i = 1;
     for (const auto & przetwarzacz : m_sumator.DajListePrzetwarzaczy())
     {
         printw("===== %d\n", i);

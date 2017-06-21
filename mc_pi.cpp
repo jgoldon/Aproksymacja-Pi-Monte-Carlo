@@ -4,6 +4,10 @@
 
 int main()
 {
+    initscr();
+    cbreak();
+    noecho();
+    nodelay(stdscr, TRUE);
     const size_t dlugosc_kolejki = 1000;
     const size_t ilosc_watkow_przetwarzacza = 10;
     {
@@ -41,5 +45,6 @@ int main()
         sumator.Stop();
         aproksymator.Stop();
     }
+    endwin();
     return 0;
 }

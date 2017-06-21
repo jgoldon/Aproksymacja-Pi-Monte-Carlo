@@ -5,7 +5,6 @@ Generator::Generator(const size_t a_rozmiar_listy)
 : m_rozmiar_listy(a_rozmiar_listy)
 , m_watek()
 {
-    PobierzLiczby();
 }
 
 Generator::~Generator()
@@ -16,7 +15,7 @@ Generator::~Generator()
     }   
 }
 
-void Generator::PobierzLiczby()
+void Generator::LadujKolejke()
 {
     std::lock_guard<std::mutex> blokada(m_bariera_listy);
     while(m_lista_liczb.size() < m_rozmiar_listy)

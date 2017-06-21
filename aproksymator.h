@@ -1,7 +1,7 @@
 #ifndef _aproksymator_h_
 #define _aproksymator_h_
 
-#include"sumator.h"
+#include "sumator.h"
 
 class Aproksymator
 {
