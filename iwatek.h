@@ -1,8 +1,8 @@
 #ifndef __I_WATEK__H__
 #define __I_WATEK__H__
 
-#include<thread>
-#include<mutex>
+#include <thread>
+#include <mutex>
 
 class IWatek
 {

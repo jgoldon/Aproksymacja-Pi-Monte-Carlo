@@ -2,15 +2,20 @@
 #include "aproksymator.h"
 #include "ekran.h"
 
-int main()
-{
-    initscr();
-    cbreak();
-    noecho();
-    nodelay(stdscr, TRUE);
+#include<iostream>
 
-    const size_t dlugosc_kolejki = 1000;
-    const size_t ilosc_watkow_przetwarzacza = 10;
+int main(int argc, char** argv)
+{
+
+    if (argc != 3)
+    {
+        std::cout << "uzyj:" << std::endl;
+        std::cout << argv[0] << " dlugosc_bufora liczba_watkow" << std::endl;
+        return 0;
+    }
+
+    size_t dlugosc_kolejki = std::stoi(argv[1]);
+    size_t ilosc_watkow_przetwarzacza = std::stoi(argv[2]);
 
     // Budujemy zależności
     Generator generator(dlugosc_kolejki);
@@ -22,6 +27,10 @@ int main()
     Sumator sumator(lista_przetwarzaczy);
     Aproksymator aproksymator(sumator);
 
+    // Główny wątek programu
+    Ekran ekran(generator, sumator, aproksymator);
+    ekran.Start();
+
     // Uruchamiamy wątki
     generator.Start();
     for (auto & przetwarzacz : lista_przetwarzaczy)
@@ -31,11 +40,8 @@ int main()
     sumator.Start();
     aproksymator.Start();
 
-    // Główny wątek programu
-    {
-        Ekran ekran(generator, sumator, aproksymator);
-        ekran.Start();
-    }
+    // Czekamy na zamknięcie głównego wątku
+    ekran.Join();
 
     // Zatrzymujemy pozostałe wątki
     generator.Stop();
@@ -46,6 +52,5 @@ int main()
     sumator.Stop();
     aproksymator.Stop();
 
-    endwin();
     return 0;
 }

@@ -12,20 +12,22 @@ void Generator::LadujKolejke()
     std::lock_guard<std::mutex> blokada(m_bariera);
     while(m_lista_liczb.size() < m_rozmiar_listy)
     {
-        PobierzLiczbe();
+        LadujLiczbe();
     }
 }
 
 Generator::liczba_t Generator::DajLiczbe()
 {
-    std::lock_guard<std::mutex> blokada(m_bariera);
-    if (!m_lista_liczb.empty())
+    while(true)
     {
-        PobierzLiczbe();
+        std::lock_guard<std::mutex> blokada(m_bariera);
+        if (!m_lista_liczb.empty())
+        {
+            auto liczba = m_lista_liczb.front();
+            m_lista_liczb.pop();
+            return liczba;   
+        }
     }
-    auto liczba = m_lista_liczb.front();
-    m_lista_liczb.pop();
-    return liczba;
 }
 
 Generator::liczba_t Generator::DajLiczbe(const liczba_t a_start, const liczba_t a_koniec)
@@ -45,8 +47,10 @@ void Generator::GlownaPetla()
 {
     while(m_aktywny)
     {
-        LadujKolejke();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        if (m_lista_liczb.empty())
+        {
+            LadujKolejke();
+        }
     }
 }
 
@@ -64,7 +68,7 @@ bool Generator::CzyJestLiczba()
     return !m_lista_liczb.empty();
 }
 
-void Generator::PobierzBufor()
+void Generator::LadujBufor()
 {
     std::ifstream is;
     is.open("/dev/urandom", std::ios::binary);
@@ -82,8 +86,8 @@ Generator::liczba_t Generator::PobierzLiczbeZBufora() const
     return liczba;
 }
 
-void Generator::PobierzLiczbe()
+void Generator::LadujLiczbe()
 {
-    PobierzBufor(); 
+    LadujBufor(); 
     m_lista_liczb.push(PobierzLiczbeZBufora());
 }

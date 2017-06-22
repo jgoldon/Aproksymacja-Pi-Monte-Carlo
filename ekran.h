@@ -1,6 +1,5 @@
 #ifndef _ekran_h_
 #define _ekran_h_
-#include <ncurses.h>
 #include "aproksymator.h"
 #include <thread>
 
@@ -10,7 +9,9 @@ public:
     Ekran(Generator & a_generator, Sumator & a_sumator, Aproksymator & a_aproksymator);
     ~Ekran();
     void Start();
+    void Join();
 private:
+    void Inicjuj();
     void Wyswietl();
     void GlownaPetla(); 
     Generator & m_generator;

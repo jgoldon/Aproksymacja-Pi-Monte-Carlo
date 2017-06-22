@@ -24,9 +24,9 @@ public:
     void Start();
     void LadujKolejke();
  private:
-    void PobierzBufor();
+    void LadujBufor();
     liczba_t PobierzLiczbeZBufora() const;
-    void PobierzLiczbe();
+    void LadujLiczbe();
     static const size_t m_rozmiar_liczby = sizeof(liczba_t);
     char m_bufor[m_rozmiar_liczby];
     size_t m_rozmiar_listy = 0;

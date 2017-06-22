@@ -1,6 +1,7 @@
 #include "ekran.h"
 #include <thread>
 #include <chrono>
+#include <ncurses.h>
 
 Ekran::Ekran(Generator & a_generator, Sumator & a_sumator, Aproksymator & a_aproksymator)
 : m_generator(a_generator)
@@ -9,16 +10,26 @@ Ekran::Ekran(Generator & a_generator, Sumator & a_sumator, Aproksymator & a_apro
 {
 }
 
+void Ekran::Inicjuj()
+{
+    initscr();
+    cbreak();
+    noecho();
+    nodelay(stdscr, TRUE);
+}
+
 Ekran::~Ekran()
 {
     if(m_watek.joinable())
     {
         m_watek.join();
-    }   
+    }
+    endwin();
 }
 
 void Ekran::Wyswietl()
 {
+    Inicjuj();
     clear();
     printw("liczba pi: %f\n", m_aproksymator.DajPi());
     printw("dlugosc kolejki: %d\n", m_generator.DajDlugoscKolejki());
@@ -55,5 +66,13 @@ void Ekran::Start()
     if(!m_watek.joinable())
     {
         m_watek = std::thread(&Ekran::GlownaPetla, this);
+    }
+}
+
+void Ekran::Join()
+{
+    if(m_watek.joinable())
+    {
+        m_watek.join();
     }
 }
