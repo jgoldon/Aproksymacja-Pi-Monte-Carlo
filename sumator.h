@@ -1,10 +1,10 @@
 #ifndef _sumator_h_
 #define _sumator_h_
 
-#include <vector>
-#include <memory>
-#include "iwatek.h"
-#include "przetwarzacz.h"
+#include<vector>
+#include<memory>
+#include"iwatek.h"
+#include"przetwarzacz.h"
 
 class Sumator : public IWatek
 {

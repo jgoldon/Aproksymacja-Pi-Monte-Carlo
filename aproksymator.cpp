@@ -1,4 +1,4 @@
-#include "aproksymator.h"
+#include"aproksymator.h"
 
 Aproksymator::Aproksymator(Sumator & a_sumator)
 : m_sumator(a_sumator)
@@ -30,5 +30,6 @@ void Aproksymator::GlownaPetla()
     while(m_aktywny)
     {
         ObliczPi();
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }

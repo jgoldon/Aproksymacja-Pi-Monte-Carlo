@@ -1,4 +1,4 @@
-#include "sumator.h"
+#include"sumator.h"
 
 Sumator::Sumator(lista_przetwarzaczy_t & a_lista_przetwarzaczy)
 : m_lista_przetwarzaczy(a_lista_przetwarzaczy)

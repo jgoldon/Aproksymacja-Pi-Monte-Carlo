@@ -1,6 +1,6 @@
-#include <memory>
-#include "aproksymator.h"
-#include "ekran.h"
+#include<memory>
+#include"aproksymator.h"
+#include"ekran.h"
 
 #include<iostream>
 

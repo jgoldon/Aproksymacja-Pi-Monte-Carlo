@@ -1,11 +1,11 @@
 #ifndef _generator_h_
 #define _generator_h_
 
-#include <queue>
-#include <fstream>
-#include <climits>
-#include <cmath>
-#include "iwatek.h"
+#include<queue>
+#include<fstream>
+#include<climits>
+#include<cmath>
+#include"iwatek.h"
 
 class Generator : public IWatek
 {

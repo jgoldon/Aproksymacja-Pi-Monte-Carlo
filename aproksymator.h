@@ -1,8 +1,8 @@
 #ifndef _aproksymator_h_
 #define _aproksymator_h_
 
-#include "iwatek.h"
-#include "sumator.h"
+#include"iwatek.h"
+#include"sumator.h"
 
 class Aproksymator : public IWatek
 {

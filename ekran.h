@@ -1,7 +1,7 @@
 #ifndef _ekran_h_
 #define _ekran_h_
-#include "aproksymator.h"
-#include <thread>
+#include"aproksymator.h"
+#include<thread>
 
 class Ekran
 {

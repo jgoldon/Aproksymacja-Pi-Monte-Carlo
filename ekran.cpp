@@ -1,7 +1,7 @@
-#include "ekran.h"
+#include"ekran.h"
 #include <thread>
 #include <chrono>
-#include <ncurses.h>
+#include<ncurses.h>
 
 Ekran::Ekran(Generator & a_generator, Sumator & a_sumator, Aproksymator & a_aproksymator)
 : m_generator(a_generator)

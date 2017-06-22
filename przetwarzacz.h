@@ -1,8 +1,8 @@
 #ifndef _przetwarzacz_h_
 #define _przetwarzacz_h_
 
-#include "iwatek.h"
-#include "generator.h"
+#include"iwatek.h"
+#include"generator.h"
 
 class Przetwarzacz : public IWatek
 {
