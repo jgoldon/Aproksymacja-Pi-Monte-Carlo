@@ -1,7 +1,7 @@
-OBJS=mc_pi.o generator.o przetwarzacz.o sumator.o aproksymator.o ekran.o
-CXX=g++
-CXXFLAGS=-Wall -Wextra -pedantic
-LDFLAGS=-lncurses
+OBJS=mc_pi.o generator.o przetwarzacz.o sumator.o aproksymator.o ekran.o iwatek.o
+CXX=i686-w64-mingw32-g++
+CXXFLAGS=-Wall -Wextra -pedantic -std=c++14
+LDFLAGS=-lncurses -pthread
 
 all: mc_pi
 
